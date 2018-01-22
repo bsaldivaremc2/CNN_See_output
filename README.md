@@ -300,7 +300,7 @@ def train(ix,iy,iters=10,lr=0.001,save_model=True,save_name=None,restore_model=F
     #Define the model here--DOWN
     CV1 = conv(xi,filter_size=3,layer_depth=2,name_scope="CL1",is_training=train_bool)
     CV2 = conv(CV1,filter_size=3,layer_depth=2,name_scope="CL2",is_training=train_bool)
-    prediction = fc(CV2,n=10,name_scope="FCL",prev_conv=True)
+    prediction = fc(CV2,n=class_output,name_scope="FCL",prev_conv=True)
     #Define the model here--UP
     
     y_CNN = tf.nn.softmax(prediction,name='Softmax')
@@ -1532,7 +1532,7 @@ def train_max(ix,iy,iters=10,lr=0.001,save_model=True,save_name=None,restore_mod
     
     CV1 = conv(xi,filter_size=3,layer_depth=2,name_scope="CL1",is_training=train_bool,max_bool=True)
     CV2 = conv(CV1,filter_size=3,layer_depth=2,name_scope="CL2",is_training=train_bool,max_bool=True)
-    prediction = fc(CV2,n=10,name_scope="FCL",prev_conv=True)
+    prediction = fc(CV2,n=class_output,name_scope="FCL",prev_conv=True)
     
     y_CNN = tf.nn.softmax(prediction,name='Softmax')
     class_pred = tf.argmax(y_CNN,1,name='ClassPred')
